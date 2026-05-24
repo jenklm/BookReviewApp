@@ -10,6 +10,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
     int bookId;
     Book book;
+    DBHelper dbHelper;
 
     TextView tvBookTitle;
     TextView tvBookAuthor;
@@ -19,10 +20,13 @@ public class BookDetailActivity extends AppCompatActivity {
     TextView tvBookTags;
     TextView tvBookInfo;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+        dbHelper = new DBHelper(this);
 
         bookId = getIntent().getIntExtra("book_id", 1);
         book = BookData.getBookById(bookId);
@@ -39,13 +43,16 @@ public class BookDetailActivity extends AppCompatActivity {
 
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
-        findViewById(R.id.btnTopBookmark).setOnClickListener(v ->
-                Toast.makeText(this, book.title + " 북마크에 저장되었습니다.", Toast.LENGTH_SHORT).show()
-        );
+        findViewById(R.id.btnBookmark).setOnClickListener(v -> {
+            dbHelper.insertBookmark(book.id);
+            Toast.makeText(this, book.title + " 북마크에 저장되었습니다.", Toast.LENGTH_SHORT).show();
+        });
 
-        findViewById(R.id.btnBookmark).setOnClickListener(v ->
-                Toast.makeText(this, book.title + " 북마크에 저장되었습니다.", Toast.LENGTH_SHORT).show()
-        );
+        findViewById(R.id.btnTopBookmark).setOnClickListener(v -> {
+            dbHelper.insertBookmark(book.id);
+            Toast.makeText(this, book.title + " 북마크에 저장되었습니다.", Toast.LENGTH_SHORT).show();
+        });
+
 
         findViewById(R.id.videoBox).setOnClickListener(v ->
                 Toast.makeText(this, book.title + " 관련 영상 재생", Toast.LENGTH_SHORT).show()
