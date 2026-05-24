@@ -5,6 +5,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.graphics.Color;
+import android.content.Intent;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,29 +40,13 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout rowBook2 = findViewById(R.id.rowBook2);
         LinearLayout rowBook3 = findViewById(R.id.rowBook3);
 
-        cardBook1.setOnClickListener(v ->
-                Toast.makeText(this, "책 상세보기 화면은 다음 단계에서 연결합니다.", Toast.LENGTH_SHORT).show()
-        );
+        cardBook1.setOnClickListener(v -> openBookDetail(1));
+        cardBook2.setOnClickListener(v -> openBookDetail(2));
+        cardBook3.setOnClickListener(v -> openBookDetail(3));
 
-        cardBook2.setOnClickListener(v ->
-                Toast.makeText(this, "책 상세보기 화면은 다음 단계에서 연결합니다.", Toast.LENGTH_SHORT).show()
-        );
-
-        cardBook3.setOnClickListener(v ->
-                Toast.makeText(this, "책 상세보기 화면은 다음 단계에서 연결합니다.", Toast.LENGTH_SHORT).show()
-        );
-
-        rowBook1.setOnClickListener(v ->
-                Toast.makeText(this, "달러구트 꿈 백화점 선택", Toast.LENGTH_SHORT).show()
-        );
-
-        rowBook2.setOnClickListener(v ->
-                Toast.makeText(this, "데미안 선택", Toast.LENGTH_SHORT).show()
-        );
-
-        rowBook3.setOnClickListener(v ->
-                Toast.makeText(this, "불편한 편의점 선택", Toast.LENGTH_SHORT).show()
-        );
+        rowBook1.setOnClickListener(v -> openBookDetail(1));
+        rowBook2.setOnClickListener(v -> openBookDetail(4));
+        rowBook3.setOnClickListener(v -> openBookDetail(2));
 
         chipAll.setOnClickListener(v -> selectChip("전체"));
         chipNovel.setOnClickListener(v -> selectChip("소설"));
@@ -127,5 +114,11 @@ public class MainActivity extends AppCompatActivity {
         chipSelf.setTextColor(purple);
         chipPsychology.setTextColor(purple);
         chipHuman.setTextColor(purple);
+    }
+
+    private void openBookDetail(int bookId) {
+        Intent intent = new Intent(this, BookDetailActivity.class);
+        intent.putExtra("book_id", bookId);
+        startActivity(intent);
     }
 }
