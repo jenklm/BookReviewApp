@@ -566,45 +566,75 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
+        <LinearLayout
             android:id="@+id/navHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="⌂\n홈"
-            android:textColor="#5F35C8"
-            android:textSize="12sp" />
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
+                android:layout_width="1000dp"
+                android:layout_height="1000dp"
+                android:gravity="center"
+                android:text="⌂"
+                android:textColor="#5F35C8"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/navFocus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="◴\n집중모드"
-            android:textColor="#777777"
-            android:textSize="12sp" />
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
+                android:layout_width="1000dp"
+                android:layout_height="1000dp"
+                android:gravity="center"
+                android:text="◴"
+                android:textColor="#777777"
+                android:textSize="45sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/navReview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="✎\n리뷰"
-            android:textColor="#777777"
-            android:textSize="12sp" />
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
+                android:layout_width="1000dp"
+                android:layout_height="1000dp"
+                android:gravity="center"
+                android:text="✎"
+                android:textColor="#777777"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/navMyPage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="♙\n마이페이지"
-            android:textColor="#777777"
-            android:textSize="12sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="1000dp"
+                android:layout_height="1000dp"
+                android:gravity="center"
+                android:text="♙"
+                android:textColor="#777777"
+                android:textSize="30sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>
