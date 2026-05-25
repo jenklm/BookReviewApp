@@ -58,23 +58,31 @@ public class MyPageActivity extends AppCompatActivity {
                 Toast.makeText(this, "집중모드는 다음 단계에서 연결합니다.", Toast.LENGTH_SHORT).show()
         );
 
-        findViewById(R.id.navReview).setOnClickListener(v ->
-                Toast.makeText(this, "리뷰 화면은 다음 단계에서 연결합니다.", Toast.LENGTH_SHORT).show()
-        );
+        findViewById(R.id.menuBookmarks).setOnClickListener(v -> {
+            Intent intent = new Intent(this, BookmarkListActivity.class);
+            startActivity(intent);
+        });
 
         findViewById(R.id.navMyPage).setOnClickListener(v ->
                 Toast.makeText(this, "현재 마이페이지입니다.", Toast.LENGTH_SHORT).show()
         );
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadMyPageData();
+    }
+
     private void loadMyPageData() {
+        dbHelper.removeDuplicateBookmarks();
+
         int bookmarkCount = dbHelper.getBookmarkCount();
         int reviewCount = dbHelper.getReviewCount();
 
         tvBookmarkCount.setText(String.valueOf(bookmarkCount));
         tvReviewCount.setText(String.valueOf(reviewCount));
 
-        // 독서 타이머 저장 기능 연결 전까지는 기록 개수 기준으로 임시 표시
         int readingRecordCount = dbHelper.getReadingRecordCount();
         if (readingRecordCount == 0) {
             tvReadingTime.setText("0시간");
@@ -82,4 +90,6 @@ public class MyPageActivity extends AppCompatActivity {
             tvReadingTime.setText(readingRecordCount + "회");
         }
     }
+
+
 }

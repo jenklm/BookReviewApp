@@ -46,7 +46,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int getBookmarkCount() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM bookmarks", null);
+
+        Cursor cursor = db.rawQuery(
+                "SELECT COUNT(DISTINCT book_id) FROM bookmarks",
+                null
+        );
 
         int count = 0;
         if (cursor.moveToFirst()) {
@@ -84,6 +88,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertBookmark(int bookId) {
+        if (isBookmarked(bookId)) {
+            return;
+        }
+
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -93,9 +101,51 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("bookmarks", null, values);
     }
 
+    public boolean isBookmarked(int bookId) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT id FROM bookmarks WHERE book_id = ? LIMIT 1",
+                new String[]{String.valueOf(bookId)}
+        );
+
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+
+        return exists;
+    }
+
+    public void deleteBookmark(int bookId) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(
+                "bookmarks",
+                "book_id = ?",
+                new String[]{String.valueOf(bookId)}
+        );
+    }
+
     public Cursor getBookmarks() {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM bookmarks ORDER BY id DESC", null);
+
+        return db.rawQuery(
+                "SELECT MIN(id) AS id, book_id, saved_date " +
+                        "FROM bookmarks " +
+                        "GROUP BY book_id " +
+                        "ORDER BY id DESC",
+                null
+        );
+    }
+
+    public void removeDuplicateBookmarks() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL(
+                "DELETE FROM bookmarks " +
+                        "WHERE id NOT IN (" +
+                        "SELECT MIN(id) FROM bookmarks GROUP BY book_id" +
+                        ")"
+        );
     }
 
     public void insertReview(int bookId, float rating, String content) {

@@ -43,14 +43,13 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/btnTopBookmark"
                     android:layout_width="48dp"
                     android:layout_height="52dp"
-                    android:gravity="center"
-                    android:text="♡"
-                    android:textColor="#111111"
-                    android:textSize="28sp" />
+                    android:padding="13dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/bookmark_outline" />
             </LinearLayout>
 
             <!-- 책 기본 정보 -->

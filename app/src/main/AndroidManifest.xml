@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".BookDetailActivity" />
         <activity android:name=".MyPageActivity" />
+        <activity android:name=".BookmarkListActivity" />
     </application>
 
 
