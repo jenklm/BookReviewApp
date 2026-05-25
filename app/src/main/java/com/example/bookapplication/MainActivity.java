@@ -63,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "리뷰 화면은 다음 단계에서 제작합니다.", Toast.LENGTH_SHORT).show()
         );
 
-        findViewById(R.id.navMyPage).setOnClickListener(v ->
-                Toast.makeText(this, "마이페이지는 다음 단계에서 제작합니다.", Toast.LENGTH_SHORT).show()
-        );
+        findViewById(R.id.navMyPage).setOnClickListener(v -> {
+            Intent intent = new Intent(this, MyPageActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void selectChip(String selected) {
