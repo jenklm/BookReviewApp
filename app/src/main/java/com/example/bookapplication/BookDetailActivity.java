@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
+import android.content.Intent;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,9 +61,11 @@ public class BookDetailActivity extends AppCompatActivity {
                 Toast.makeText(this, book.title + " 관련 영상 재생", Toast.LENGTH_SHORT).show()
         );
 
-        findViewById(R.id.btnReviewWrite).setOnClickListener(v ->
-                Toast.makeText(this, book.title + " 리뷰 작성 화면은 다음 단계에서 연결합니다.", Toast.LENGTH_SHORT).show()
-        );
+        findViewById(R.id.btnReviewWrite).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ReviewWriteActivity.class);
+            intent.putExtra("book_id", book.id);
+            startActivity(intent);
+        });
     }
 
     private void setBookData() {

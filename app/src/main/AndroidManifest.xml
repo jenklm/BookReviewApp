@@ -24,6 +24,8 @@
         <activity android:name=".BookDetailActivity" />
         <activity android:name=".MyPageActivity" />
         <activity android:name=".BookmarkListActivity" />
+        <activity android:name=".ReviewWriteActivity" />
+        <activity android:name=".ReviewListActivity" />
     </application>
 
 
